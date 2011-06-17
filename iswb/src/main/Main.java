@@ -37,18 +37,21 @@ public class Main
 	 */
 	public static void main(String[] args) throws FileNotFoundException
 	{
-		//printStart
+		//// -------- Copiato in view printStart
 		System.out.println("===== Program Start =====");
-		
+		//// -------- Copiato in view printStart END
+
+	
 		// creiamo un parser standard con in file di schema fornito;
 		// se lo schema non � leggibile, terminamo il programma.
-		Parser parser = new Parser(); // -------- Copiato in view printFileStatus
+		Parser parser = new Parser(); 
+		// -------- Copiato in view printFileStatus
 		if (!parser.canReadSchemaFile()) 
 			{
 			System.out.println("Errore! Non posso leggere il file dello schema!");
 			System.out.println("Ho cercato il file: "+parser.getSchemaPath());
 			System.exit(-1);
-			} // -------- Copiato in view END
+			} // -------- Copiato in view printFileStatus END
 		
 		//carichiamo il file xml contenente i dati delle macchine,
 		//alternativamente possiamo farlo come parametro di invocazione del metodo
@@ -91,13 +94,13 @@ public class Main
 		{
 			System.out.println("Il file risulta correttamente leggibile.");
 		}
-		// -------- Copiato in view END 
+		// -------- Copiato in view printFileStatus END 
 		
 		//eseguiamo il parsing dei dati dal file xml alle classi del package "engine"
 		
 		// -------- Copiato in view waitForParsing
 		System.out.println("Attendi mentre eseguo il parsing del file...");
-		// -------- Copiato in view END
+		// -------- Copiato in view waitForParsing END
 		
 		Engine motore=null;
 
@@ -121,14 +124,14 @@ public class Main
 			System.exit(-1);
 			e.printStackTrace();
 		}
-		// -------- Copiato in view END
+		// -------- Copiato in view printParseError END
 		
 		//iniziamo la simulazione vera e propria
 		if (motore!=null)
 		{
 			// -------- Copiato in view printStartSimulation
 			System.out.println("=====Inizio simulazione=====");
-			// -------- Copiato in view END
+			// -------- Copiato in view printStartSimulation END
 			
 			int letto; //passo da simulare alla prossima iterazione
 			List<PassoSimulazione> passi;
@@ -143,7 +146,7 @@ public class Main
 				System.out.println("Stato corrente delle macchine:");
 				System.out.println(motore.statiCorrentiToString());
 				System.out.println("=====");
-				// -------- Copiato in view END
+				// -------- Copiato in view printCurrentState END
 				
 				//mostro i passi attivi e chiedo quale eseguire
 				// -------- Copiato in view printActiveTransitions MANCA LOGICA
@@ -163,7 +166,7 @@ public class Main
 					}
 					letto=InputDati.leggiIntero("Scegli un valore: ", 0, passi.size());
 				}
-				// -------- Copiato in view END
+				// -------- Copiato in view printActiveTransitions END
 				//eseguo il passo
 				if (letto!=0)
 					// -------- Copiato in view runNextStep
@@ -173,7 +176,7 @@ public class Main
 					System.out.print(passi.get(letto-1).toString());
 					
 					motore.esegui(passi.get(letto-1));
-					// -------- Copiato in view MANCA LOGICA
+					// -------- Copiato in view runNextStep END MANCA LOGICA
 				}
 			}
 			while (letto!=0); //termino solo se viene inserito zero.
@@ -181,7 +184,7 @@ public class Main
 		
 		// -------- Copiato in view printEnd
 		System.out.println("===== Program  End  =====");
-		// -------- Copiato in view END
+		// -------- Copiato in view printEnd END
 	}
 	
 	
