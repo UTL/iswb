@@ -1,4 +1,6 @@
 package main;
+import it.unibs.fp.mylib.InputDati;
+
 import java.util.List;
 
 import javax.xml.bind.JAXBException;
@@ -74,8 +76,11 @@ public class View {
 		System.out.println("=====");
 	}
 	
-	//chiede anche il nuovo passo
-	public void printActiveTransitions(List<PassoSimulazione> passi){
+	//se restituisce -1 non ci sono più transizioni
+	//se restituisce 0 l'utente vuole terminare
+	//se n > 1 fa scattare la transizione
+	public int printActiveTransitions(List<PassoSimulazione> passi){
+		int letto = -1;
 		if (passi.size() == 0)
 		{
 			System.out.println("Non ci sono altre transazioni attive per le macchine!");
@@ -87,7 +92,9 @@ public class View {
 				System.out.println((i+1)+": "+passi.get(i).toString());
 			}
 			System.out.println("Scegli un passo di simulazione da eseguire (zero per terminare):\n");
+		letto=InputDati.leggiIntero("Digita un valore: ", 0, passi.size());
 		}
+		return letto;
 	}
 	
 	//bisogna passare direttamente il passo che viene dalla List<passosimulazione> passi
