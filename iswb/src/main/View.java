@@ -5,7 +5,16 @@ import javax.xml.bind.JAXBException;
 
 import org.xml.sax.SAXException;
 
+import bindings.Tipotransizione;
+
+import engine.Asincrone;
+import engine.ListaRelazioni;
+import engine.MacchinaStatiFiniti;
+import engine.MutuamenteEsclusive;
 import engine.PassoSimulazione;
+import engine.Sincrone;
+import engine.Stato;
+import engine.Transazione;
 
 
 public class View {
@@ -88,17 +97,44 @@ public class View {
 		System.out.print(passo.toString());
 	}
 	
+	public void printFileContent(List<Stato> tempListaStatiUno,List<Stato> tempListaStatiDue, MacchinaStatiFiniti macchinaUno,MacchinaStatiFiniti macchinaDue, List<Transazione> tempListaTransizioniUno, List<Transazione> tempListaTransizioniDue){
+		
+		System.out.println("Dati contenuti nel file: \n");
+		
+		System.out.println("Macchina: "+macchinaUno.getNome());
+		printFSMInfo(tempListaStatiUno);
+		printTransitionsInfo(tempListaTransizioniUno);
+		
+		System.out.println("Macchina: "+macchinaDue.getNome());
+		printFSMInfo(tempListaStatiDue);
+		printTransitionsInfo(tempListaTransizioniDue);
+
+	}
 	
+	private void printFSMInfo(List<Stato> tempListaStati){
+		System.out.println("Lista stati:");
+		
+		for (int i=0;i<tempListaStati.size();i++)
+		{
+			System.out.print(i+"= "+tempListaStati.get(i).toString()+"; transazioni uscenti: ");
+			for (int y=0;y<tempListaStati.get(i).getTransazioniUscenti().size();y++)
+				System.out.print(tempListaStati.get(i).getTransazioniUscenti().get(y).getNome()+"; ");
+			System.out.print("\n");
+		}
+	}
 	
+	private void printTransitionsInfo(List<Transazione> tempListaTransizioni){
+		System.out.println("Lista transizioni:");
+		for (int i=0;i<tempListaTransizioni.size();i++)
+		{
+			System.out.println(i+"= "+tempListaTransizioni.get(i).getNome()+"; stato di arrivo: "+tempListaTransizioni.get(i).getStatoArrivo().getNome());
+		}
+		System.out.print("\n");
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	private void printRelazione(Transazione tUno,Transazione tDue,String tipoRelazione){
+			System.out.println("Imposto relazione "+tipoRelazione+" tra "+tUno.toString()+" e "+tDue.toString()+".");
+	}
 	
 }
 
