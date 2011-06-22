@@ -60,8 +60,9 @@ public class Main
 		
 		if (args.length!=1)
 		{
-			
-			String nome= InputDati.leggiStringa("Per favore scrivi il nome del file di input: "); // -------- Copiato in view
+			// -------- Copiato in view askInputFile
+			String nome= InputDati.leggiStringa("Per favore scrivi il nome del file di input: "); 
+			// -------- Copiato in view askInputFile END
 			//controlliamo che sia un percoso relativo
 			
 			if (!nome.startsWith(File.separator))

@@ -130,6 +130,7 @@ public class Parser
 		
 		
 		//-----DEBUG-----
+		// -------- Copiato in view printFileContent
 		System.out.println("Dati contenuti nel file: \n");
 		System.out.println("Macchina: "+macchinaUno.getNome());
 		System.out.println("Lista stati:");
@@ -140,6 +141,7 @@ public class Parser
 				System.out.print(tempListaStatiUno.get(i).getTransazioniUscenti().get(y).getNome()+"; ");
 			System.out.print("\n");
 		}
+		
 		System.out.println("Lista transazioni:");
 		for (int i=0;i<tempListaTransizioniUno.size();i++)
 		{
@@ -158,6 +160,7 @@ public class Parser
 		System.out.println("Lista transazioni:");
 		for (int i=0;i<tempListaTransizioniDue.size();i++)
 			System.out.println(i+"= "+tempListaTransizioniDue.get(i).getNome()+"; stato di arrivo: "+tempListaTransizioniDue.get(i).getStatoArrivo().getNome());
+		// -------- Copiato in view END printFileContent
 		//-----DEBUG END-----
 		
 		//il motore � quasi pronto. le macchine sono impostate

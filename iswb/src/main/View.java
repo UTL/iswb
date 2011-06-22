@@ -2,7 +2,7 @@ package main;
 import it.unibs.fp.mylib.InputDati;
 
 import java.util.List;
-
+ 
 import javax.xml.bind.JAXBException;
 
 import org.xml.sax.SAXException;
@@ -20,6 +20,7 @@ import engine.Transazione;
 
 
 public class View {
+	
 	public void printStart(){
 		System.out.println("===== Avvio programma =====");
 	}
@@ -29,18 +30,22 @@ public class View {
 	}
 	
 	public void printFileStatus(boolean isReadable, boolean isSchema, String path){
-		if (!isSchema) System.out.print("Il file schema ");
+		if (isSchema) System.out.print("Il file schema ");
 		else System.out.print("Il file XML ");
 		
 		System.out.print("che si trova in "+ path+ " ");
 		
-		if (!isReadable) System.out.println("non è leggibile.");
+		if (!isReadable) System.out.println("non esiste o non e' leggibile.");
 		else System.out.println("è stato caricato correttamente.");
 		
 	}
 	
 	public void askInputFile(){
 		System.out.println("Digita il nome del file di input: ");
+		System.out.println("Esempio: testcase/primo.xml");
+		System.out.println("Esempio: testcase/secondo.xml");
+		System.out.println("Esempio: testcase/terzo.xml");
+		System.out.println("Esempio: testcase/quarto.xml");
 	}
 	
 	public void waitForParsing(){
@@ -79,8 +84,7 @@ public class View {
 	//se restituisce -1 non ci sono più transizioni
 	//se restituisce 0 l'utente vuole terminare
 	//se n > 1 fa scattare la transizione
-	public int printActiveTransitions(List<PassoSimulazione> passi){
-		int letto = -1;
+	public void printActiveTransitions(List<PassoSimulazione> passi){
 		if (passi.size() == 0)
 		{
 			System.out.println("Non ci sono altre transazioni attive per le macchine!");
@@ -92,9 +96,7 @@ public class View {
 				System.out.println((i+1)+": "+passi.get(i).toString());
 			}
 			System.out.println("Scegli un passo di simulazione da eseguire (zero per terminare):\n");
-		letto=InputDati.leggiIntero("Digita un valore: ", 0, passi.size());
 		}
-		return letto;
 	}
 	
 	//bisogna passare direttamente il passo che viene dalla List<passosimulazione> passi
@@ -104,33 +106,39 @@ public class View {
 		System.out.print(passo.toString());
 	}
 	
-	public void printFileContent(List<Stato> tempListaStatiUno,List<Stato> tempListaStatiDue, MacchinaStatiFiniti macchinaUno,MacchinaStatiFiniti macchinaDue, List<Transazione> tempListaTransizioniUno, List<Transazione> tempListaTransizioniDue){
+	public void printFileContent(Model modello){
 		
 		System.out.println("Dati contenuti nel file: \n");
 		
-		System.out.println("Macchina: "+macchinaUno.getNome());
-		printFSMInfo(tempListaStatiUno);
-		printTransitionsInfo(tempListaTransizioniUno);
+		System.out.println("Macchina: "+modello.getNomeMacchinaUno());
+		printFSMInfo(modello, 1);
+		//printInfoTransizioni(modello, 1);
 		
-		System.out.println("Macchina: "+macchinaDue.getNome());
-		printFSMInfo(tempListaStatiDue);
-		printTransitionsInfo(tempListaTransizioniDue);
+		System.out.println("Macchina: "+modello.getNomeMacchinaDue());
+		printFSMInfo(modello, 2);
+		//printInfoTransizioni(modello, 2);
+
 
 	}
 	
-	private void printFSMInfo(List<Stato> tempListaStati){
+	private void printFSMInfo(Model modello, int numeroMacchina){
+		
+		//if (i == 1) 
 		System.out.println("Lista stati:");
 		
-		for (int i=0;i<tempListaStati.size();i++)
+		for (int i=0;i<modello.getNumeroStati(numeroMacchina);i++)
 		{
-			System.out.print(i+"= "+tempListaStati.get(i).toString()+"; transazioni uscenti: ");
-			for (int y=0;y<tempListaStati.get(i).getTransazioniUscenti().size();y++)
-				System.out.print(tempListaStati.get(i).getTransazioniUscenti().get(y).getNome()+"; ");
+			//tempListaStati.get(i).toString() metodo
+			System.out.println(i+"= "+ modello.getNomeStato(i, numeroMacchina)+"; \ntransazioni uscenti: ");	//tempListaStati.get(i).toString()+"; transazioni uscenti: ");
+			for (int y=0;y< modello.getNumeroTransizioniUscenti(i, numeroMacchina);y++){//tempListaStati.get(i).getTransazioniUscenti().size();y++)
+				System.out.print("\t"+modello.getNomeTransizioneUscente(i, y, numeroMacchina) +", ");//tempListaStati.get(i).getTransazioniUscenti().get(y).getNome()+"; ");
+				System.out.println("il cui stato di arrivo e':"+modello.getNomeStatoArrivo(i, y, numeroMacchina));
+			}
 			System.out.print("\n");
 		}
 	}
 	
-	private void printTransitionsInfo(List<Transazione> tempListaTransizioni){
+	/*private void printInfoTransizioni(Model modello, int numeroMacchina){
 		System.out.println("Lista transizioni:");
 		for (int i=0;i<tempListaTransizioni.size();i++)
 		{
@@ -141,7 +149,21 @@ public class View {
 	
 	public void printRelazione(Transazione tUno,Transazione tDue,String tipoRelazione){
 			System.out.println("Imposto relazione "+tipoRelazione+" tra "+tUno.toString()+" e "+tDue.toString()+".");
+	}*/
+	
+	public void printRelazioni(Model modello){
+		for(int i =0; i < modello.getNumeroTotaleTransizioni(); i++){
+			System.out.print("'"+modello.getNomeTransizione(i)+"'");
+			System.out.print("  relazione ");
+			if(modello.getTipoRelazione(i).equals(Tipotransizione.ASINCRONA))
+				System.out.println("ASINCRONA");
+			else if(modello.getTipoRelazione(i).equals(Tipotransizione.SINCRONA))
+				System.out.println("SINCRONA");
+			else System.out.println("MUTEX");
+		}
+		
 	}
+
 	
 }
 
