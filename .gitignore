@@ -1,0 +1,14 @@
+.metadata/
+iswb.tar.gz
+iswb/.classpath
+iswb/.project
+iswb/.settings/
+iswb/README.txt
+iswb/bin/
+iswb/build/
+iswb/docs/
+iswb/src/bindings/
+iswb/src/it/
+iswb/testcase/
+metodiStampaStati.tar.gz
+
