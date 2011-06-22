@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dati xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <macchina nome="M1">
+        <listastati>
+            <statoiniziale nome="S1"/>
+            <stato nome="S2"/>
+            <stato nome="S3"/>
+            <stato nome="S4"/>
+        </listastati>
+        <listatransizioni>
+            <transizioni nome="T1">
+                <statoiniziale nome="S1"/>
+                <statofinale nome="S2"/>
+            </transizioni>
+            <transizioni nome="T2">
+                <statoiniziale nome="S2"/>
+                <statofinale nome="S3"/>
+            </transizioni>
+            <transizioni nome="T3">
+                <statoiniziale nome="S3"/>
+                <statofinale nome="S4"/>
+            </transizioni>
+            <transizioni nome="T4">
+                <statoiniziale nome="S4"/>
+                <statofinale nome="S1"/>
+            </transizioni>
+        </listatransizioni>
+    </macchina>
+    <macchina nome="M2">
+        <listastati>
+            <statoiniziale nome="S1"/>
+            <stato nome="S2"/>
+            <stato nome="S3"/>
+        </listastati>
+        <listatransizioni>
+            <transizioni nome="T1">
+                <statoiniziale nome="S1"/>
+                <statofinale nome="S2"/>
+            </transizioni>
+            <transizioni nome="T2">
+                <statoiniziale nome="S2"/>
+                <statofinale nome="S3"/>
+            </transizioni>
+            <transizioni nome="T3">
+                <statoiniziale nome="S3"/>
+                <statofinale nome="S1"/>
+            </transizioni>
+        </listatransizioni>
+    </macchina>
+    <listarelazioni>
+        <relazione tipo="sincrona">
+            <transizione nome="T1" macchina="M1"/>
+            <transizione nome="T3" macchina="M2"/>
+        </relazione>
+        <relazione tipo="mutex">
+            <transizione nome="T2" macchina="M1"/>
+            <transizione nome="T2" macchina="M2"/>
+        </relazione>
+        <relazione tipo="mutex">
+            <transizione nome="T2" macchina="M2"/>
+            <transizione nome="T3" macchina="M1"/>
+        </relazione>
+        
+        
+    </listarelazioni>
+</dati>

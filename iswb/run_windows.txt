@@ -1,0 +1,4 @@
+java -cp bin\ main.Main
+@ECHO OFF
+echo Il programma e' terminato e ora verra' chiuso.
+pause

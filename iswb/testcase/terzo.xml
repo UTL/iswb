@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dati xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <macchina nome="Una">
+        <listastati>
+            <statoiniziale nome="Primo"/>
+            <stato nome="Secondo"/>
+            <stato nome="Terzo"/>
+            <stato nome="Quarto"/>
+        </listastati>
+        <listatransizioni>
+            <transizioni nome="a">
+                <statoiniziale nome="Primo"/>
+                <statofinale nome="Secondo"/>
+            </transizioni>
+            <transizioni nome="b">
+                <statoiniziale nome="Primo"/>
+                <statofinale nome="Terzo"/>
+            </transizioni>
+            <transizioni nome="c">
+                <statoiniziale nome="Primo"/>
+                <statofinale nome="Quarto"/>
+            </transizioni>
+        </listatransizioni>
+    </macchina>
+    <macchina nome="Altra">
+        <listastati>
+            <statoiniziale nome="Uno"/>
+            <stato nome="Due"/>
+            <stato nome="Tre"/>
+        </listastati>
+        <listatransizioni>
+            <transizioni nome="d">
+                <statoiniziale nome="Uno"/>
+                <statofinale nome="Due"/>
+            </transizioni>
+            <transizioni nome="e">
+                <statoiniziale nome="Uno"/>
+                <statofinale nome="Tre"/>
+            </transizioni>
+        </listatransizioni>
+    </macchina>
+    <listarelazioni>
+        <relazione tipo="sincrona">
+            <transizione nome="c" macchina="Una"/>
+            <transizione nome="d" macchina="Altra"/>
+        </relazione>
+        <relazione tipo="sincrona">
+            <transizione nome="b" macchina="Una"/>
+            <transizione nome="e" macchina="Altra"/>
+        </relazione>
+        <relazione tipo="mutex">
+            <transizione nome="b" macchina="Una"/>
+            <transizione nome="d" macchina="Altra"/>
+        </relazione>
+        <relazione tipo="mutex">
+            <transizione nome="a" macchina="Una"/>
+            <transizione nome="d" macchina="Altra"/>
+        </relazione>
+        
+        
+    </listarelazioni>
+</dati>

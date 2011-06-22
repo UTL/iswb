@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dati xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <macchina nome="Uno">
+        <listastati>
+            <statoiniziale nome="S1"/>
+            <stato nome="S2"/>
+            <stato nome="S3"/>
+        </listastati>
+        <listatransizioni>
+            <transizioni nome="t1">
+                <statoiniziale nome="S1"/>
+                <statofinale nome="S2"/>
+            </transizioni>
+            <transizioni nome="t2">
+                <statoiniziale nome="S1"/>
+                <statofinale nome="S3"/>
+            </transizioni>
+            <transizioni nome="t3">
+                <statoiniziale nome="S2"/>
+                <statofinale nome="S1"/>
+            </transizioni>
+            
+            
+            
+        </listatransizioni>
+    </macchina>
+ 
+    
+    
+    <listarelazioni>
+        
+    </listarelazioni>
+</dati>

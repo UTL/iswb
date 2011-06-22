@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dati xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <macchina nome="Numeri">
+        <listastati>
+            <statoiniziale nome="Uno"/>
+            <stato nome="Due"/>
+            <stato nome="Tre"/>
+            <stato nome="Quattro"/>
+            <stato nome="Cinque"/>
+        </listastati>
+        <listatransizioni>
+            <transizioni nome="1">
+                <statoiniziale nome="Uno"/>
+                <statofinale nome="Due"/>
+            </transizioni>
+            <transizioni nome="2">
+                <statoiniziale nome="Due"/>
+                <statofinale nome="Tre"/>
+            </transizioni>
+            <transizioni nome="3">
+                <statoiniziale nome="Tre"/>
+                <statofinale nome="Quattro"/>
+            </transizioni>
+            <transizioni nome="4">
+                <statoiniziale nome="Quattro"/>
+                <statofinale nome="Cinque"/>
+            </transizioni>
+        </listatransizioni>
+    </macchina>
+    <macchina nome="Tipo">
+        <listastati>
+            <statoiniziale nome="Dispari"/>
+            <stato nome="Pari"/>
+        </listastati>
+        <listatransizioni>
+            <transizioni nome="a">
+                <statoiniziale nome="Pari"/>
+                <statofinale nome="Dispari"/>
+            </transizioni>
+            <transizioni nome="b">
+                <statoiniziale nome="Dispari"/>
+                <statofinale nome="Pari"/>
+            </transizioni>
+        </listatransizioni>
+    </macchina>
+    <listarelazioni>
+        <relazione tipo="sincrona">
+            <transizione nome="1" macchina="Numeri"/>
+            <transizione nome="b" macchina="Tipo"/>
+        </relazione>
+        <relazione tipo="sincrona">
+            <transizione nome="2" macchina="Numeri"/>
+            <transizione nome="a" macchina="Tipo"/>
+        </relazione>
+        <relazione tipo="sincrona">
+            <transizione nome="3" macchina="Numeri"/>
+            <transizione nome="b" macchina="Tipo"/>
+        </relazione>
+        <relazione tipo="sincrona">
+            <transizione nome="4" macchina="Numeri"/>
+            <transizione nome="a" macchina="Tipo"/>
+        </relazione>
+    </listarelazioni>
+</dati>

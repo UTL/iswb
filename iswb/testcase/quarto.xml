@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dati xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <macchina nome="sinistra">
+        <listastati>
+            <statoiniziale nome="Pippo"/>
+            <stato nome="Piero"/>
+            <stato nome="Giacomo"/>
+            <stato nome="Giovanni"/>
+        </listastati>
+        <listatransizioni>
+            <transizioni nome="1">
+                <statoiniziale nome="Pippo"/>
+                <statofinale nome="Piero"/>
+            </transizioni>
+            <transizioni nome="2">
+                <statoiniziale nome="Piero"/>
+                <statofinale nome="Giacomo"/>
+            </transizioni>
+            <transizioni nome="3">
+                <statoiniziale nome="Giacomo"/>
+                <statofinale nome="Pippo"/>
+            </transizioni>
+            <transizioni nome="4">
+                <statoiniziale nome="Giacomo"/>
+                <statofinale nome="Giovanni"/>
+            </transizioni>
+            <transizioni nome="5">
+                <statoiniziale nome="Giovanni"/>
+                <statofinale nome="Giacomo"/>
+            </transizioni>
+        </listatransizioni>
+    </macchina>
+    <macchina nome="destra">
+        <listastati>
+            <statoiniziale nome="Marta"/>
+            <stato nome="Camilla"/>
+            <stato nome="Anna"/>
+        </listastati>
+        <listatransizioni>
+            <transizioni nome="a">
+                <statoiniziale nome="Marta"/>
+                <statofinale nome="Camilla"/>
+            </transizioni>
+            <transizioni nome="b">
+                <statoiniziale nome="Camilla"/>
+                <statofinale nome="Marta"/>
+            </transizioni>
+            <transizioni nome="c">
+                <statoiniziale nome="Camilla"/>
+                <statofinale nome="Anna"/>
+            </transizioni>
+            <transizioni nome="d">
+                <statoiniziale nome="Anna"/>
+                <statofinale nome="Camilla"/>
+            </transizioni>
+            <transizioni nome="e">
+                <statoiniziale nome="Anna"/>
+                <statofinale nome="Marta"/>
+            </transizioni>
+            <transizioni nome="f">
+                <statoiniziale nome="Marta"/>
+                <statofinale nome="Anna"/>
+            </transizioni>
+        </listatransizioni>
+    </macchina>
+    <listarelazioni>
+        <relazione tipo="mutex">
+            <transizione nome="1" macchina="sinistra"/>
+            <transizione nome="a" macchina="destra"/>
+        </relazione>
+        <relazione tipo="sincrona">
+            <transizione nome="1" macchina="sinistra"/>
+            <transizione nome="e" macchina="destra"/>
+        </relazione>
+        <relazione tipo="sincrona">
+            <transizione nome="2" macchina="sinistra"/>
+            <transizione nome="e" macchina="destra"/>
+        </relazione>
+        <relazione tipo="sincrona">
+            <transizione nome="2" macchina="sinistra"/>
+            <transizione nome="b" macchina="destra"/>
+        </relazione>
+        <relazione tipo="mutex">
+            <transizione nome="5" macchina="sinistra"/>
+            <transizione nome="d" macchina="destra"/>
+        </relazione>
+        
+    </listarelazioni>
+</dati>
