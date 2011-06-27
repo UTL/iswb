@@ -72,7 +72,7 @@ public class ListaRelazioni
 				System.out.println("risultato: "+uscita);
 				System.out.println("--");
 				*/
-				//se non lo è lo aggiungo alla lista dei passi da rimuovere
+				//se non lo e` lo aggiungo alla lista dei passi da rimuovere
 				if (!uscita)
 					daRimuovere.add(listaPassi.get(i));
 				}
