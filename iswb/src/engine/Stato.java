@@ -20,7 +20,7 @@ public class Stato
 	 */
 	private String nome;
 	private MacchinaStatiFiniti macchina;
-	private List<Transazione> uscenti;
+	private List<Transizione> uscenti;
 	
 	/**
 	 * Il costruttore della classe richiede la macchina a stati finiti a cui appartiene lo stato
@@ -33,7 +33,7 @@ public class Stato
 	{
 		this.macchina=macchina;
 		this.nome=nome;
-		uscenti=new ArrayList<Transazione>();
+		uscenti=new ArrayList<Transizione>();
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class Stato
 	 * 
 	 * @param nuova La transazione da aggiungere
 	 */
-	public void addTransazione(Transazione nuova)
+	public void addTransazione(Transizione nuova)
 	{
 		uscenti.add(nuova);
 	}
@@ -89,7 +89,7 @@ public class Stato
 	 * 
 	 * @return La lista delle trensazione uscenti
 	 */
-	public List<Transazione> getTransazioniUscenti()
+	public List<Transizione> getTransazioniUscenti()
 	{
 		return uscenti;
 	}

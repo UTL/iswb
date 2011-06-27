@@ -29,7 +29,7 @@ import engine.MutuamenteEsclusive;
 import engine.PassoSimulazione;
 import engine.Sincrone;
 import engine.Stato;
-import engine.Transazione;
+import engine.Transizione;
 public class Model {
 	private File schema;
 	private File xml;
@@ -39,8 +39,8 @@ public class Model {
 	private MacchinaStatiFiniti macchinaDue;
 	List<Stato> tempListaStatiUno = new ArrayList<Stato>();
 	List<Stato> tempListaStatiDue = new ArrayList<Stato>();
- 	private List<Transazione> tempListaTransizioniUno = new ArrayList<Transazione>();
-	private List<Transazione> tempListaTransizioniDue = new ArrayList<Transazione>();
+ 	private List<Transizione> tempListaTransizioniUno = new ArrayList<Transizione>();
+	private List<Transizione> tempListaTransizioniDue = new ArrayList<Transizione>();
 
 
 	/*public MacchinaStatiFiniti getMacchina(int i){
@@ -116,7 +116,7 @@ public class Model {
 			//stato temporaneo: quello finale della transazione
 			Stato tempStato = cercaStato(tempListaStatiUno,dati.getMacchina().get(0).getListatransizioni().getTransizioni().get(i).getStatofinale().getNome());
 			//costruttore temporaneo: quello della transazione (la macchina, il suo nome, lo stato temporaneo)
-			Transazione tempTransizione = new Transazione(macchinaUno,dati.getMacchina().get(0).getListatransizioni().getTransizioni().get(i).getNome(),tempStato);
+			Transizione tempTransizione = new Transizione(macchinaUno,dati.getMacchina().get(0).getListatransizioni().getTransizioni().get(i).getNome(),tempStato);
 			//aggiungiamo alla lista temporanea
 			tempListaTransizioniUno.add(tempTransizione);
 			//aggiungiamo la transazione al suo stato iniziale
@@ -130,7 +130,7 @@ public class Model {
 		for (int i=0; i<max;i++)
 		{
 			Stato tempStato = cercaStato(tempListaStatiDue,dati.getMacchina().get(1).getListatransizioni().getTransizioni().get(i).getStatofinale().getNome());
-			Transazione tempTransazione = new Transazione(macchinaDue,dati.getMacchina().get(1).getListatransizioni().getTransizioni().get(i).getNome(),tempStato);
+			Transizione tempTransazione = new Transizione(macchinaDue,dati.getMacchina().get(1).getListatransizioni().getTransizioni().get(i).getNome(),tempStato);
 			tempListaTransizioniDue.add(tempTransazione);
 			cercaStato(tempListaStatiDue,dati.getMacchina().get(1).getListatransizioni().getTransizioni().get(i).getStatoiniziale().getNome()).addTransazione(tempTransazione);
 		}
@@ -202,8 +202,8 @@ public class Model {
 		//per ogni relazione...
 		for (int i=0;i<tempListaRelazioni.size();i++)
 		{
-			Relazionetype.Transizione transizioneUno = tempListaRelazioni.get(i).getTransizione().get(0);
-			Relazionetype.Transizione transizioneDue = tempListaRelazioni.get(i).getTransizione().get(1);
+			Relazionetype.TempTransizione transizioneUno = tempListaRelazioni.get(i).getTransizione().get(0);
+			Relazionetype.TempTransizione transizioneDue = tempListaRelazioni.get(i).getTransizione().get(1);
 			
 			//verificahiamo che la prima transizione sia della prima macchina
 			//e la seconda della seconda
@@ -319,7 +319,7 @@ public class Model {
 	 * @param nome
 	 * @return
 	 */
-	private Transazione cercaTransizione(List<Transazione> listaTransazioni, String nome)
+	private Transizione cercaTransizione(List<Transizione> listaTransazioni, String nome)
 	{
 		for(int i=0;i<listaTransazioni.size();i++)
 		{
@@ -329,7 +329,7 @@ public class Model {
 		return null;
 	}
 	
-	private boolean contieneTransizione(List<Transizionitype> listaTransizioni, Relazionetype.Transizione transizione)
+	private boolean contieneTransizione(List<Transizionitype> listaTransizioni, Relazionetype.TempTransizione transizione)
 	{
 		boolean risultato=false;
 		for (int i = 0; i<listaTransizioni.size();i++)
@@ -429,8 +429,8 @@ public class Model {
 		
 		public String getNomeTransizione(int numeroTransizione){
 			Relazionetype tempRelazione = dati.getListarelazioni().getRelazione().get(numeroTransizione);
-			Transazione tempUno=null;
-			Transazione tempDue=null;
+			Transizione tempUno=null;
+			Transizione tempDue=null;
 			String output = tempRelazione.getTransizione().get(0).getNome();
 
 			/*if (tempRelazione.getTransizione().get(0).getMacchina().equals(macchinaUno.getNome())
@@ -452,10 +452,10 @@ public class Model {
 			return output;
 		}
 		
-		private Transazione getTransizione(Relazionetype tempRelazione, boolean transizioneUno){
-			Transazione tempUno=null;
-			Transazione tempDue=null;
-			Transazione output= null;
+		private Transizione getTransizione(Relazionetype tempRelazione, boolean transizioneUno){
+			Transizione tempUno=null;
+			Transizione tempDue=null;
+			Transizione output= null;
 			if (tempRelazione.getTransizione().get(0).getMacchina().equals(macchinaUno.getNome())
 					&& tempRelazione.getTransizione().get(1).getMacchina().equals(macchinaDue.getNome()) )
 			{

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Questa è la classe principale e si occupa di simulare le due macchine.
+ * Questa ï¿½ la classe principale e si occupa di simulare le due macchine.
  * <br>
  * Essa matinene tutti gli oggetti necessari alla simulazione, computa
  * i passi di simulazione eseguibili (anche sulla base delle relazioni 
@@ -40,7 +40,7 @@ public class Engine
 	
 	/**
 	 * Imposta la matrice delle relazioni tra le due macchine che
-	 * dovrà essere usata per computare i passi di simulazione validi.
+	 * dovrï¿½ essere usata per computare i passi di simulazione validi.
 	 * 
 	 * @param relazioni L'oggetto che contiene tutte le relazioni tra le due macchine
 	 */
@@ -53,7 +53,7 @@ public class Engine
 	 * Questo metodo restituisce tutti i passi di simulazione che possono
 	 * essere eseguiti dalle due macchine in base al loro stato attuale.
 	 * <br>
-	 * In particolare quindi conterrà tutte le transazioni attive che non
+	 * In particolare quindi conterrï¿½ tutte le transazioni attive che non
 	 * violano nessuna relazione tra le due macchine.
 	 * 
 	 * @return La lista dei passi di simulazioni eseguibili
@@ -61,8 +61,8 @@ public class Engine
 	public List<PassoSimulazione> getPassiAttivi()
 	{
 		//le transazioni attive delle due macchine.
-		List<Transazione> uno = macchinaUno.getStatoCorrente().getTransazioniUscenti();
-		List<Transazione> due = macchinaDue.getStatoCorrente().getTransazioniUscenti();
+		List<Transizione> uno = macchinaUno.getStatoCorrente().getTransazioniUscenti();
+		List<Transizione> due = macchinaDue.getStatoCorrente().getTransazioniUscenti();
 		List<PassoSimulazione> lista = new ArrayList<PassoSimulazione>();
 		
 		//computa tutte le coppie di transizioni eseguibili come passi di simulazione
@@ -81,7 +81,7 @@ public class Engine
 			}
 		}
 		
-		//se non è stata impostata la matrice di relazioni ritorniamo la lista
+		//se non ï¿½ stata impostata la matrice di relazioni ritorniamo la lista
 		//altrimenti prima filtriamo quelle non ammissibli con la matrice
 		if (matriceRelazioni==null)
 			return lista;

@@ -110,8 +110,8 @@ public class Parser
 		//per ogni relazione...
 		for (int i=0;i<tempListaRelazioni.size();i++)
 		{
-			Relazionetype.Transizione transizioneUno = tempListaRelazioni.get(i).getTransizione().get(0);
-			Relazionetype.Transizione transizioneDue = tempListaRelazioni.get(i).getTransizione().get(1);
+			Relazionetype.TempTransizione transizioneUno = tempListaRelazioni.get(i).getTransizione().get(0);
+			Relazionetype.TempTransizione transizioneDue = tempListaRelazioni.get(i).getTransizione().get(1);
 			
 			//verificahiamo che la prima transizione sia della prima macchina
 			//e la seconda della seconda
@@ -234,7 +234,7 @@ public class Parser
 	 * @param transizione
 	 * @return
 	 */
-	private boolean contieneTransizione(List<Transizionitype> listaTransizioni, Relazionetype.Transizione transizione)
+	private boolean contieneTransizione(List<Transizionitype> listaTransizioni, Relazionetype.TempTransizione transizione)
 	{
 		boolean risultato=false;
 		for (int i = 0; i<listaTransizioni.size();i++)
@@ -269,7 +269,7 @@ public class Parser
 	 * @param nome
 	 * @return
 	 */
-	private Transazione cercaTransizione(List<Transazione> listaTransazioni, String nome)
+	private Transizione cercaTransizione(List<Transizione> listaTransazioni, String nome)
 	{
 		for(int i=0;i<listaTransazioni.size();i++)
 		{

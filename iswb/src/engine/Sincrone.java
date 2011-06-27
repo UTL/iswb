@@ -17,8 +17,8 @@ public class Sincrone implements Relazione
 	/**
 	 * 
 	 */
-	private Transazione prima;
-	private Transazione seconda;
+	private Transizione prima;
+	private Transizione seconda;
 	
 	/**
 	 * Il costruttore richiede le due transazioni che devono essere impostate come sincrone.
@@ -26,7 +26,7 @@ public class Sincrone implements Relazione
 	 * @param prima Una transazione
 	 * @param seconda L'altra transazione
 	 */
-	public Sincrone (Transazione prima, Transazione seconda)
+	public Sincrone (Transizione prima, Transizione seconda)
 	{
 		this.prima=prima;
 		this.seconda=seconda;
@@ -36,11 +36,11 @@ public class Sincrone implements Relazione
 	{
 		boolean uscita;
 		/*
-		 * se il passo di simulazione è un singlo e contiene una delle due
+		 * se il passo di simulazione ï¿½ un singlo e contiene una delle due
 		 * transizioni sincorone allora ritorniamo falso
-		 * (un passo di simulazione non può mai essere singlo con una transazione sincrona)
+		 * (un passo di simulazione non puï¿½ mai essere singlo con una transazione sincrona)
 		 * in caso contrario ritorniamo vero. 
-		 * NOTA: verifichiamo però che tutte e due le transazioni siano attive!!
+		 * NOTA: verifichiamo perï¿½ che tutte e due le transazioni siano attive!!
 		 */
 		//System.out.println("--");
 		
@@ -80,7 +80,7 @@ public class Sincrone implements Relazione
 		}
 		
 		
-//		System.out.println("La sincronia tra "+prima.toString()+" che è "+prima.isAttiva()+" e "+seconda.toString()+" che è "+seconda.isAttiva()+" ritiene che:");
+//		System.out.println("La sincronia tra "+prima.toString()+" che ï¿½ "+prima.isAttiva()+" e "+seconda.toString()+" che ï¿½ "+seconda.isAttiva()+" ritiene che:");
 //		System.out.print("il "+passo.toString());
 //		System.out.println("sia da valutare: "+uscita);
 //		System.out.println("--");

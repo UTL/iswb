@@ -20,8 +20,8 @@ public class PassoSimulazione
 	/**
 	 * 
 	 */
-	private Transazione prima;
-	private Transazione seconda;
+	private Transizione prima;
+	private Transizione seconda;
 	
 	/**
 	 * Le due transazioni delle due macchine che compongono il passo di simulazione.
@@ -31,7 +31,7 @@ public class PassoSimulazione
 	 * @param prima Una transazione
 	 * @param seconda L'altra transazione
 	 */
-	public PassoSimulazione(Transazione prima, Transazione seconda)
+	public PassoSimulazione(Transizione prima, Transizione seconda)
 	{
 		this.prima=prima;
 		this.seconda=seconda;
@@ -65,7 +65,7 @@ public class PassoSimulazione
 	 * @param transazione La transazione da verificare se � contenuta nel passo
 	 * @return True se la transazione � contenuta
 	 */
-	public boolean contiene(Transazione transazione)
+	public boolean contiene(Transizione transazione)
 	{
 		/*
 		System.out.println("prima: "+prima.toString());

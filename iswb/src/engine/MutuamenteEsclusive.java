@@ -16,8 +16,8 @@ public class MutuamenteEsclusive implements Relazione
 	/**
 	 * 
 	 */
-	private Transazione prima;
-	private Transazione seconda;
+	private Transizione prima;
+	private Transizione seconda;
 	
 	/**
 	 * Il costruttore richiede le due transazioni che devono essere impostate come sincrone.
@@ -25,7 +25,7 @@ public class MutuamenteEsclusive implements Relazione
 	 * @param prima Una transazione
 	 * @param seconda L'altra transazione
 	 */
-	public MutuamenteEsclusive(Transazione prima, Transazione seconda)
+	public MutuamenteEsclusive(Transizione prima, Transizione seconda)
 	{
 		this.prima=prima;
 		this.seconda=seconda;
@@ -36,7 +36,7 @@ public class MutuamenteEsclusive implements Relazione
 		boolean uscita;
 		/*
 		 * se il passo si applica (ovvero contiene le due transizioni che devono essere
-		 * mutuiamente esclusive)  e non è un singlo ritorniamo false,
+		 * mutuiamente esclusive)  e non ï¿½ un singlo ritorniamo false,
 		 * altrimenti ritorniamo true. 
 		 */
 		if (passo.contiene(prima) && passo.contiene(seconda) && ! passo.singolo())

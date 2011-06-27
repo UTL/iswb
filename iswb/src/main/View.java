@@ -16,7 +16,7 @@ import engine.MutuamenteEsclusive;
 import engine.PassoSimulazione;
 import engine.Sincrone;
 import engine.Stato;
-import engine.Transazione;
+import engine.Transizione;
 
 
 public class View {
