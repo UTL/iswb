@@ -246,7 +246,26 @@ public class Model {
 	
 	checkStati(statoIniziale, tempListaStati);
 	checkTransizioni(statoIniziale, tempListaStati, tempListaTransizioni);
+	checkStatoIniziale(statoIniziale, true);
+	checkStatoIniziale(statoIniziale, false);
+	
 }
+
+	private void checkStatoIniziale(Statotype statoIniziale, boolean statoMacchinaUno) {
+		List<Transizione>tempListaTransizioni;
+		if(statoMacchinaUno) tempListaTransizioni = tempListaTransizioniUno;
+		else tempListaTransizioni = tempListaTransizioniDue;
+		int max = tempListaTransizioni.size();
+		
+		//statoIniziale.
+		
+		for (int i=0; i<max; i++)
+		{
+			//if(!tempListaTransizioni.get(i).ge  getStatoiniziale().equals(statoIniziale));
+		}
+		
+		//statoIniziale.
+	}
 
 	private void checkStati(Statotype statoIniziale,
 			List<Statotype> tempListaStati) throws JAXBException {
@@ -456,6 +475,8 @@ public class Model {
 			{
 				tempUno=cercaTransizione(tempListaTransizioniUno, tempRelazione.getTransizione().get(0).getNome());
 				tempDue=cercaTransizione(tempListaTransizioniDue, tempRelazione.getTransizione().get(1).getNome());
+				
+
 			}
 			else if (tempRelazione.getTransizione().get(1).getMacchina().equals(macchinaUno.getNome())
 					&& tempRelazione.getTransizione().get(0).getMacchina().equals(macchinaDue.getNome()))
