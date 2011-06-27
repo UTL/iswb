@@ -246,18 +246,18 @@ public class Model {
 	
 	checkStati(statoIniziale, tempListaStati);
 	checkTransizioni(statoIniziale, tempListaStati, tempListaTransizioni);
-	checkStatoIniziale(statoIniziale, true);
-	checkStatoIniziale(statoIniziale, false);
-	
+	//checkStatoIniziale(statoIniziale, true);
+	//checkStatoIniziale(statoIniziale, false);
+	/*
 }
 
-	private void checkStatoIniziale(Statotype statoIniziale, boolean statoMacchinaUno) {
+	private void checkStatoIniziale(Stato statoIniziale, boolean statoMacchinaUno) {
 		List<Transizione>tempListaTransizioni;
 		if(statoMacchinaUno) tempListaTransizioni = tempListaTransizioniUno;
 		else tempListaTransizioni = tempListaTransizioniDue;
 		int max = tempListaTransizioni.size();
 		
-		//statoIniziale.
+		statoIniziale.getTransazioniUscenti();
 		
 		for (int i=0; i<max; i++)
 		{
@@ -265,7 +265,7 @@ public class Model {
 		}
 		
 		//statoIniziale.
-	}
+	}*/
 
 	private void checkStati(Statotype statoIniziale,
 			List<Statotype> tempListaStati) throws JAXBException {
@@ -299,6 +299,7 @@ public class Model {
 		int max;
 		max= tempListaTransizioni.size();
 		//verifichiamo l'unicit� del nome di ogni transizione e...
+		boolean statoInizIsolato = false;
 		for (int i=0; i<max; i++)
 		{
 			//...e che non sia vuoto e che...
@@ -318,7 +319,11 @@ public class Model {
 			if (!contieneStato(tempListaStati,tempListaTransizioni.get(i).getStatofinale()) &&
 					! statoIniziale.getNome().equals(tempListaTransizioni.get(i).getStatofinale().getNome()))
 				throw new JAXBException("Errore! Una transizione fa riferimento ad uno stato non esistente!");
+			if (!tempListaTransizioni.get(i).getStatoiniziale().equals(statoIniziale))
+				statoInizIsolato = true;
 		}
+		if (statoInizIsolato)
+			throw new JAXBException("Errore! Lo stato iniziale e` isolato!");
 	}
 	
 	private Stato cercaStato(List<Stato> listaStati, String nome) 
