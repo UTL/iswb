@@ -1,7 +1,7 @@
 package engine;
 
 /**
- * Questa classe rappresenta la transazione tra due stati di una macchina a stati finiti.
+ * Questa classe rappresenta la transizione tra due stati di una macchina a stati finiti.
  * <br>
  * Deve avere un nome, una macchina alla quale appartiene ed uno stato di arrivo.
  * 
@@ -22,13 +22,13 @@ public class Transizione
 	private boolean attiva;
 	
 	/**
-	 * il costruttore della classe richiede la macchina a cui la transazione appartiene,
-	 * un nome della transazione ed uno stato di arrivo.
+	 * il costruttore della classe richiede la macchina a cui la transizione appartiene,
+	 * un nome della transizione ed uno stato di arrivo.
 	 * 
 	 * 
-	 * @param macchina La macchina a stati finiti a cui la transazione appartiene
+	 * @param macchina La macchina a stati finiti a cui la transizione appartiene
 	 * @param nome Il suo nome
-	 * @param arrivo Lo stato di arrivo della transazione
+	 * @param arrivo Lo stato di arrivo della transizione
 	 */
 	public Transizione(MacchinaStatiFiniti macchina, String nome, Stato arrivo)
 	{
@@ -40,9 +40,9 @@ public class Transizione
 	
 
 	/**
-	 * Ritorna il nome della transazione.
+	 * Ritorna il nome della transizione.
 	 * 
-	 * @return Il nome della transazione
+	 * @return Il nome della transizione
 	 */
 	public String getNome()
 	{
@@ -50,7 +50,7 @@ public class Transizione
 	}
 	
 	/**
-	 * Ritorna la macchina a stati finiti a cui appartiene la transazione.
+	 * Ritorna la macchina a stati finiti a cui appartiene la transizione.
 	 * 
 	 * @return La macchina a cui appartiene
 	 */
@@ -65,7 +65,7 @@ public class Transizione
 	 * Le due transazioni saranno considerate uguali se appartengono alla stessa macchina ed
 	 * hanno lo stesso nome.
 	 * 
-	 * @param altra La transazione da confrontare
+	 * @param altra La transizione da confrontare
 	 * @return True se hanno lo stesso nome e appartengono alla stessa macchina
 	 */
 	public boolean equals(Transizione altra)
@@ -78,10 +78,10 @@ public class Transizione
 	}
 	
 	/**
-	 * Questo metodo segala se la transazione � attiva, ovvero se lo stato 
-	 * da cui la transazione � uscente � lo stato corrente della macchina.
+	 * Questo metodo segala se la transizione � attiva, ovvero se lo stato 
+	 * da cui la transizione � uscente � lo stato corrente della macchina.
 	 * 
-	 * @return True se la transazione � attiva
+	 * @return True se la transizione � attiva
 	 */
 	public boolean isAttiva()
 	{
@@ -89,7 +89,7 @@ public class Transizione
 	}
 	
 	/**
-	 * Imposta la condizione di essere attiva o meno per la transazione.
+	 * Imposta la condizione di essere attiva o meno per la transizione.
 	 * 
 	 * @param valore Valore booleano in base alla condizione
 	 */
@@ -99,7 +99,7 @@ public class Transizione
 	}
 	
 	/**
-	 * Ritorna lo stato di arrivo della transazione.
+	 * Ritorna lo stato di arrivo della transizione.
 	 * 
 	 * @return Lo stato di arrivo
 	 */
@@ -109,7 +109,7 @@ public class Transizione
 	}
 	
 	/**
-	 * Ritorna una stringa formattata correttamente per la stampa con il nome della transazione.
+	 * Ritorna una stringa formattata correttamente per la stampa con il nome della transizione.
 	 * 
 	 * @return
 	 */

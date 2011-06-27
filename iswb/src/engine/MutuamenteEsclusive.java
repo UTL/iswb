@@ -22,8 +22,8 @@ public class MutuamenteEsclusive implements Relazione
 	/**
 	 * Il costruttore richiede le due transazioni che devono essere impostate come sincrone.
 	 * 
-	 * @param prima Una transazione
-	 * @param seconda L'altra transazione
+	 * @param prima Una transizione
+	 * @param seconda L'altra transizione
 	 */
 	public MutuamenteEsclusive(Transizione prima, Transizione seconda)
 	{

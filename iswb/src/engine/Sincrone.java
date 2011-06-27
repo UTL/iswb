@@ -23,8 +23,8 @@ public class Sincrone implements Relazione
 	/**
 	 * Il costruttore richiede le due transazioni che devono essere impostate come sincrone.
 	 * 
-	 * @param prima Una transazione
-	 * @param seconda L'altra transazione
+	 * @param prima Una transizione
+	 * @param seconda L'altra transizione
 	 */
 	public Sincrone (Transizione prima, Transizione seconda)
 	{
@@ -38,7 +38,7 @@ public class Sincrone implements Relazione
 		/*
 		 * se il passo di simulazione � un singlo e contiene una delle due
 		 * transizioni sincorone allora ritorniamo falso
-		 * (un passo di simulazione non pu� mai essere singlo con una transazione sincrona)
+		 * (un passo di simulazione non pu� mai essere singlo con una transizione sincrona)
 		 * in caso contrario ritorniamo vero. 
 		 * NOTA: verifichiamo per� che tutte e due le transazioni siano attive!!
 		 */

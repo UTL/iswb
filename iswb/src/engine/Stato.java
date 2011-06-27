@@ -75,11 +75,11 @@ public class Stato
 	}
 
 	/**
-	 * Aggiunge una transazione uscente dallo stato.
+	 * Aggiunge una transizione uscente dallo stato.
 	 * 
-	 * @param nuova La transazione da aggiungere
+	 * @param nuova La transizione da aggiungere
 	 */
-	public void addTransazione(Transizione nuova)
+	public void addTransizione(Transizione nuova)
 	{
 		uscenti.add(nuova);
 	}

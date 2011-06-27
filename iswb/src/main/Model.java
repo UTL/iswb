@@ -113,16 +113,16 @@ public class Model {
 		max=dati.getMacchina().get(0).getListatransizioni().getTransizioni().size();
 		for (int i=0; i<max;i++)
 		{
-			//stato temporaneo: quello finale della transazione
+			//stato temporaneo: quello finale della transizione
 			Stato tempStato = cercaStato(tempListaStatiUno,dati.getMacchina().get(0).getListatransizioni().getTransizioni().get(i).getStatofinale().getNome());
-			//costruttore temporaneo: quello della transazione (la macchina, il suo nome, lo stato temporaneo)
+			//costruttore temporaneo: quello della transizione (la macchina, il suo nome, lo stato temporaneo)
 			Transizione tempTransizione = new Transizione(macchinaUno,dati.getMacchina().get(0).getListatransizioni().getTransizioni().get(i).getNome(),tempStato);
 			//aggiungiamo alla lista temporanea
 			tempListaTransizioniUno.add(tempTransizione);
-			//aggiungiamo la transazione al suo stato iniziale
+			//aggiungiamo la transizione al suo stato iniziale
 			tempStato = cercaStato(tempListaStatiUno,dati.getMacchina().get(0).getListatransizioni().getTransizioni().get(i).getStatoiniziale().getNome());
 			
-			tempStato.addTransazione(tempTransizione);
+			tempStato.addTransizione(tempTransizione);
 		}
 		
 		
@@ -130,9 +130,9 @@ public class Model {
 		for (int i=0; i<max;i++)
 		{
 			Stato tempStato = cercaStato(tempListaStatiDue,dati.getMacchina().get(1).getListatransizioni().getTransizioni().get(i).getStatofinale().getNome());
-			Transizione tempTransazione = new Transizione(macchinaDue,dati.getMacchina().get(1).getListatransizioni().getTransizioni().get(i).getNome(),tempStato);
-			tempListaTransizioniDue.add(tempTransazione);
-			cercaStato(tempListaStatiDue,dati.getMacchina().get(1).getListatransizioni().getTransizioni().get(i).getStatoiniziale().getNome()).addTransazione(tempTransazione);
+			Transizione tempTransizione = new Transizione(macchinaDue,dati.getMacchina().get(1).getListatransizioni().getTransizioni().get(i).getNome(),tempStato);
+			tempListaTransizioniDue.add(tempTransizione);
+			cercaStato(tempListaStatiDue,dati.getMacchina().get(1).getListatransizioni().getTransizioni().get(i).getStatoiniziale().getNome()).addTransizione(tempTransizione);
 		}
 		
 		//settiamo lo stato iniziale
@@ -408,24 +408,6 @@ public class Model {
 		return dati.getListarelazioni().getRelazione().size();
 	}
 	
-	/*Relazionetype tempRelazione = dati.getListarelazioni().getRelazione().get(i);
-	Transazione tempUno=null;
-	Transazione tempDue=null;
-	//se la prima transizione appartiene alla prima macchina e la seconda alla seconda
-	if (tempRelazione.getTransizione().get(0).getMacchina().equals(macchinaUno.getNome())
-			&& tempRelazione.getTransizione().get(1).getMacchina().equals(macchinaDue.getNome()) )
-	{
-		if(tempListaTransizioniUno==null)System.out.println("templista null");
-		else if(tempListaTransizioniDue==null)System.out.println("templista2 null");
-		else if(tempRelazione==null)System.out.println("temprelazione null");
-		System.out.println(tempRelazione.getTransizione().get(0).getNome());
-
-		//cerco la prima transazione nella prima lista (e la seconda nella seconda)
-		tempUno=cercaTransizione(tempListaTransizioniUno, tempRelazione.getTransizione().get(0).getNome());
-		System.out.println(tempUno.toString());
-
-		tempDue=cercaTransizione(tempListaTransizioniDue, tempRelazione.getTransizione().get(1).getNome());
-		System.out.println(tempDue.toString());*/
 		
 		public String getNomeTransizione(int numeroTransizione){
 			Relazionetype tempRelazione = dati.getListarelazioni().getRelazione().get(numeroTransizione);
@@ -441,7 +423,7 @@ public class Model {
 				else if(tempRelazione==null)System.out.println("temprelazione null");
 				output = tempRelazione.getTransizione().get(0).getNome();
 
-				//cerco la prima transazione nella prima lista (e la seconda nella seconda)
+				//cerco la prima transizione nella prima lista (e la seconda nella seconda)
 				*/
 				
 			

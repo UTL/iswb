@@ -28,8 +28,8 @@ public class PassoSimulazione
 	 * <br>
 	 * Accetta che i parametri siano "NULL". 
 	 * 
-	 * @param prima Una transazione
-	 * @param seconda L'altra transazione
+	 * @param prima Una transizione
+	 * @param seconda L'altra transizione
 	 */
 	public PassoSimulazione(Transizione prima, Transizione seconda)
 	{
@@ -60,12 +60,12 @@ public class PassoSimulazione
 	}
 	
 	/**
-	 * Verifica che questo passo di simulazione contiene la transazione fornita come argomento.
+	 * Verifica che questo passo di simulazione contiene la transizione fornita come argomento.
 	 * 
-	 * @param transazione La transazione da verificare se � contenuta nel passo
-	 * @return True se la transazione � contenuta
+	 * @param transizione La transizione da verificare se � contenuta nel passo
+	 * @return True se la transizione � contenuta
 	 */
-	public boolean contiene(Transizione transazione)
+	public boolean contiene(Transizione transizione)
 	{
 		/*
 		System.out.println("prima: "+prima.toString());
@@ -75,11 +75,11 @@ public class PassoSimulazione
 		if (prima==null && seconda==null)
 			return false;
 		else if (prima==null)
-			return this.seconda.equals(transazione);
+			return this.seconda.equals(transizione);
 		else if (seconda==null)
-			return this.prima.equals(transazione);
+			return this.prima.equals(transizione);
 		else
-			return this.prima.equals(transazione) || this.seconda.equals(transazione);
+			return this.prima.equals(transizione) || this.seconda.equals(transizione);
 		
 	}
 	

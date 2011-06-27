@@ -155,7 +155,7 @@ public class View {
 		System.out.print("\n");
 	}
 	
-	public void printRelazione(Transazione tUno,Transazione tDue,String tipoRelazione){
+	public void printRelazione(Transizione tUno,Transizione tDue,String tipoRelazione){
 			System.out.println("Imposto relazione "+tipoRelazione+" tra "+tUno.toString()+" e "+tDue.toString()+".");
 	}*/
 	
