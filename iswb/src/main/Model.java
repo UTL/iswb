@@ -21,13 +21,10 @@ import bindings.Statotype;
 import bindings.Tipotransizione;
 import bindings.Transizionitype;
 
-import engine.Asincrone;
 import engine.Engine;
 import engine.ListaRelazioni;
 import engine.MacchinaStatiFiniti;
-import engine.MutuamenteEsclusive;
 import engine.PassoSimulazione;
-import engine.Sincrone;
 import engine.Stato;
 import engine.Transizione;
 public class Model {
