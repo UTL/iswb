@@ -236,58 +236,71 @@ public class Model {
 		return dati;
 	}
 	
-	private void verificaListe(Listastatitype listaStati, Listatransizionitype listaTransizioni)
+	public void verificaListe(Listastatitype listaStati, Listatransizionitype listaTransizioni)
 	throws JAXBException
 {
 	
 	Statotype statoIniziale = listaStati.getStatoiniziale();
 	List<Statotype> tempListaStati = listaStati.getStato();
 	List<Transizionitype> tempListaTransizioni = listaTransizioni.getTransizioni();
-	int max = tempListaStati.size();
 	
-	//verifichiamo l'unicit� del nome di ogni stato...
-	//...per prima cosa che lo stato iniziale non sia vuoto
-	if (statoIniziale.getNome().equals(""))
-		throw new JAXBException("Errore! Non ci possono essere stati con il nome vuoto!");
-	for (int i=0; i<max; i++)
-	{
-		//...verifichiamo l'unicit� sia che sia quello iniziale
-		if (tempListaStati.get(i).getNome().equals(statoIniziale.getNome()))
-			throw new JAXBException("Errore! Non ci possono essere due stati con lo stesso nome!");
-		//...sia che non sia vuoto
-		if (tempListaStati.get(i).getNome().equals(""))
-			throw new JAXBException("Errore! Non ci possono essere stati con il nome vuoto!");
-		for (int y=0; y<max;y++)
-		{
-			//...sia che sia contenuto nella lista
-			if (i!=y && tempListaStati.get(i).getNome().equals(tempListaStati.get(y).getNome()) )
-				throw new JAXBException("Errore! Non ci possono essere due stati con lo stesso nome!");
-				
-		}
-	}
-	max= tempListaTransizioni.size();
-	//verifichiamo l'unicit� del nome di ogni transizione e...
-	for (int i=0; i<max; i++)
-	{
-		//...e che non sia vuoto e che...
-		if (tempListaTransizioni.get(i).getNome().equals(""))
-			throw new JAXBException("Errore! Non ci possono essere transizioni con il nome vuoto!");
-		for (int y=0; y<max;y++)
-		{
-			if (i!=y && tempListaTransizioni.get(i).getNome().equals(tempListaTransizioni.get(y).getNome()) )
-				throw new JAXBException("Errore! Non ci possono essere due transizioni con lo stesso nome!");
-				
-		}
-		//...che gli stati iniziali e finali siano nella lista degli stati
-		// (o che siano quello iniziale)
-		if (!contieneStato(tempListaStati,tempListaTransizioni.get(i).getStatoiniziale()) &&
-				! statoIniziale.getNome().equals(tempListaTransizioni.get(i).getStatoiniziale().getNome()))
-			throw new JAXBException("Errore! Una transizione fa riferimento ad uno stato non esistente: "+statoIniziale.getNome()+" != "+ tempListaTransizioni.get(i).getStatoiniziale().getNome()+"!");
-		if (!contieneStato(tempListaStati,tempListaTransizioni.get(i).getStatofinale()) &&
-				! statoIniziale.getNome().equals(tempListaTransizioni.get(i).getStatofinale().getNome()))
-			throw new JAXBException("Errore! Una transizione fa riferimento ad uno stato non esistente!");
-	}
+	checkStati(statoIniziale, tempListaStati);
+	checkTransizioni(statoIniziale, tempListaStati, tempListaTransizioni);
 }
+
+	private void checkStati(Statotype statoIniziale,
+			List<Statotype> tempListaStati) throws JAXBException {
+		int max = tempListaStati.size();
+		
+		//verifichiamo l'unicit� del nome di ogni stato...
+		//...per prima cosa che lo stato iniziale non sia vuoto
+		if (statoIniziale.getNome().equals(""))
+			throw new JAXBException("Errore! Non ci possono essere stati con il nome vuoto!");
+		for (int i=0; i<max; i++)
+		{
+			//...verifichiamo l'unicit� sia che sia quello iniziale
+			if (tempListaStati.get(i).getNome().equals(statoIniziale.getNome()))
+				throw new JAXBException("Errore! Non ci possono essere due stati con lo stesso nome!");
+			//...sia che non sia vuoto
+			if (tempListaStati.get(i).getNome().equals(""))
+				throw new JAXBException("Errore! Non ci possono essere stati con il nome vuoto!");
+			for (int y=0; y<max;y++)
+			{
+				//...sia che sia contenuto nella lista
+				if (i!=y && tempListaStati.get(i).getNome().equals(tempListaStati.get(y).getNome()) )
+					throw new JAXBException("Errore! Non ci possono essere due stati con lo stesso nome!");
+					
+			}
+		}
+	}
+
+	private void checkTransizioni(Statotype statoIniziale,
+			List<Statotype> tempListaStati,
+			List<Transizionitype> tempListaTransizioni) throws JAXBException {
+		int max;
+		max= tempListaTransizioni.size();
+		//verifichiamo l'unicit� del nome di ogni transizione e...
+		for (int i=0; i<max; i++)
+		{
+			//...e che non sia vuoto e che...
+			if (tempListaTransizioni.get(i).getNome().equals(""))
+				throw new JAXBException("Errore! Non ci possono essere transizioni con il nome vuoto!");
+			for (int y=0; y<max;y++)
+			{
+				if (i!=y && tempListaTransizioni.get(i).getNome().equals(tempListaTransizioni.get(y).getNome()) )
+					throw new JAXBException("Errore! Non ci possono essere due transizioni con lo stesso nome!");
+					
+			}
+			//...che gli stati iniziali e finali siano nella lista degli stati
+			// (o che siano quello iniziale)
+			if (!contieneStato(tempListaStati,tempListaTransizioni.get(i).getStatoiniziale()) &&
+					! statoIniziale.getNome().equals(tempListaTransizioni.get(i).getStatoiniziale().getNome()))
+				throw new JAXBException("Errore! Una transizione fa riferimento ad uno stato non esistente: "+statoIniziale.getNome()+" != "+ tempListaTransizioni.get(i).getStatoiniziale().getNome()+"!");
+			if (!contieneStato(tempListaStati,tempListaTransizioni.get(i).getStatofinale()) &&
+					! statoIniziale.getNome().equals(tempListaTransizioni.get(i).getStatofinale().getNome()))
+				throw new JAXBException("Errore! Una transizione fa riferimento ad uno stato non esistente!");
+		}
+	}
 	
 	private Stato cercaStato(List<Stato> listaStati, String nome) 
 	{
@@ -415,7 +428,19 @@ public class Model {
 			Transizione tempDue=null;
 			String output = tempRelazione.getTransizione().get(0).getNome();
 
+			/*if (tempRelazione.getTransizione().get(0).getMacchina().equals(macchinaUno.getNome())
+					&& tempRelazione.getTransizione().get(1).getMacchina().equals(macchinaDue.getNome()) )
+			{
+				if(tempListaTransizioniUno==null)System.out.println("templista null");
+				else if(tempListaTransizioniDue==null)System.out.println("templista2 null");
+				else if(tempRelazione==null)System.out.println("temprelazione null");
+				output = tempRelazione.getTransizione().get(0).getNome();
+
+				//cerco la prima transizione nella prima lista (e la seconda nella seconda)
+				*/
+				
 			
+				//output += "\n"+getTransizione(tempRelazione, true).toString();
 				output += " - ";
 				output += getTransizione(tempRelazione, false).toString();
 				//}

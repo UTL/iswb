@@ -61,7 +61,8 @@ public class Controller {
 			
 		modello.engine();
 		System.out.println("START DEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUG");
-
+		
+		
 		vista.printFileContent(modello);
 		
 		vista.printRelazioni(modello);
