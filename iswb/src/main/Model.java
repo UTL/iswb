@@ -248,9 +248,9 @@ public class Model {
 	checkTransizioni(statoIniziale, tempListaStati, tempListaTransizioni);
 	//checkStatoIniziale(statoIniziale, true);
 	//checkStatoIniziale(statoIniziale, false);
-	/*
+	
 }
-
+/*
 	private void checkStatoIniziale(Stato statoIniziale, boolean statoMacchinaUno) {
 		List<Transizione>tempListaTransizioni;
 		if(statoMacchinaUno) tempListaTransizioni = tempListaTransizioniUno;
