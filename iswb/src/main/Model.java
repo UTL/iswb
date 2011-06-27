@@ -415,19 +415,7 @@ public class Model {
 			Transizione tempDue=null;
 			String output = tempRelazione.getTransizione().get(0).getNome();
 
-			/*if (tempRelazione.getTransizione().get(0).getMacchina().equals(macchinaUno.getNome())
-					&& tempRelazione.getTransizione().get(1).getMacchina().equals(macchinaDue.getNome()) )
-			{
-				if(tempListaTransizioniUno==null)System.out.println("templista null");
-				else if(tempListaTransizioniDue==null)System.out.println("templista2 null");
-				else if(tempRelazione==null)System.out.println("temprelazione null");
-				output = tempRelazione.getTransizione().get(0).getNome();
-
-				//cerco la prima transizione nella prima lista (e la seconda nella seconda)
-				*/
-				
 			
-				//output += "\n"+getTransizione(tempRelazione, true).toString();
 				output += " - ";
 				output += getTransizione(tempRelazione, false).toString();
 				//}
