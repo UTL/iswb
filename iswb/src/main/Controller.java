@@ -65,7 +65,15 @@ public class Controller {
 		
 		vista.printFileContent(modello);
 		
-		vista.printRelazioni(modello);
+		
+		try {
+			vista.printRelazioni(modello);
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			vista.printRelError();
+			System.exit(-1);
+		}
 		System.out.println("END DEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUG");
 
 		//TODO: togliere i print da parsetoengine

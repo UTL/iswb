@@ -422,7 +422,7 @@ public class Model {
 	}
 	
 		
-		public String getNomeTransizione(int numeroTransizione){
+		public String getNomeTransizione(int numeroTransizione) throws JAXBException{
 			Relazionetype tempRelazione = dati.getListarelazioni().getRelazione().get(numeroTransizione);
 			Transizione tempUno=null;
 			Transizione tempDue=null;
@@ -447,7 +447,7 @@ public class Model {
 			return output;
 		}
 		
-		private Transizione getTransizione(Relazionetype tempRelazione, boolean transizioneUno){
+		private Transizione getTransizione(Relazionetype tempRelazione, boolean transizioneUno) throws JAXBException{
 			Transizione tempUno=null;
 			Transizione tempDue=null;
 			Transizione output= null;
@@ -457,12 +457,15 @@ public class Model {
 				tempUno=cercaTransizione(tempListaTransizioniUno, tempRelazione.getTransizione().get(0).getNome());
 				tempDue=cercaTransizione(tempListaTransizioniDue, tempRelazione.getTransizione().get(1).getNome());
 			}
-			else 
+			else if (tempRelazione.getTransizione().get(1).getMacchina().equals(macchinaUno.getNome())
+					&& tempRelazione.getTransizione().get(0).getMacchina().equals(macchinaDue.getNome()))
 			{
 				//System.out.println("Cond due");
 				tempUno=cercaTransizione(tempListaTransizioniDue, tempRelazione.getTransizione().get(0).getNome());
 				tempDue=cercaTransizione(tempListaTransizioniUno, tempRelazione.getTransizione().get(1).getNome());
 			}
+			else 
+				throw new JAXBException("Errore! Non possono esistere stati senza transizioni!");
 			
 			if (transizioneUno)
 				output=tempUno;

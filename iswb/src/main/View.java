@@ -159,7 +159,7 @@ public class View {
 			System.out.println("Imposto relazione "+tipoRelazione+" tra "+tUno.toString()+" e "+tDue.toString()+".");
 	}*/
 	
-	public void printRelazioni(Model modello){
+	public void printRelazioni(Model modello) throws JAXBException{
 		for(int i =0; i < modello.getNumeroTotaleTransizioni(); i++){
 			System.out.print("'"+modello.getNomeTransizione(i)+"'");
 			System.out.print("  relazione ");
@@ -175,6 +175,11 @@ public class View {
 	public void printEseguo(){
 		System.out.println("=====");
 		System.out.println("Eseguo:");
+	}
+
+	public void printRelError() {
+		System.out.println("Errore, non ci possono essere stati senza transizioni");
+		
 	}
 
 	
