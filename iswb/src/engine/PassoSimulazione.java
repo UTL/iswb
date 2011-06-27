@@ -6,7 +6,7 @@ package engine;
  * In particolare contiene le transazioni che devono essere attivate per quel passo,
  * una per ogni macchina a stati finiti.
  * <br>
- * Può anche essere "singolo" ovvero, contenere transazioni solo di una macchina e non
+ * Puï¿½ anche essere "singolo" ovvero, contenere transazioni solo di una macchina e non
  * dell'altra: in questo caso l'altra macchina si suppone che per quel passo non modifichi
  * il suo stato.
  * 
@@ -38,16 +38,16 @@ public class PassoSimulazione
 	}
 	
 	/**
-	 * Verifica se il passo di simulazione è singolo,
+	 * Verifica se il passo di simulazione ï¿½ singolo,
 	 * ovvero se contiene transazioni solo di una macchina e non dell'altra. 
 	 * 
-	 * @return True se il passo è singolo
+	 * @return True se il passo ï¿½ singolo
 	 */
 	public boolean singolo()
 	{
 		/*
-		 * ritorniamo 'vero' (cioè è un passo di simulazione singlo)
-		 * se una delle due transizioni è NULL
+		 * ritorniamo 'vero' (cioï¿½ ï¿½ un passo di simulazione singlo)
+		 * se una delle due transizioni ï¿½ NULL
 		 */
 		if (prima==null || seconda==null)
 		{
@@ -62,8 +62,8 @@ public class PassoSimulazione
 	/**
 	 * Verifica che questo passo di simulazione contiene la transazione fornita come argomento.
 	 * 
-	 * @param transazione La transazione da verificare se è contenuta nel passo
-	 * @return True se la transazione è contenuta
+	 * @param transazione La transazione da verificare se ï¿½ contenuta nel passo
+	 * @return True se la transazione ï¿½ contenuta
 	 */
 	public boolean contiene(Transazione transazione)
 	{
@@ -71,7 +71,7 @@ public class PassoSimulazione
 		System.out.println("prima: "+prima.toString());
 		System.out.println("seconda: "+seconda.toString());
 		*/
-		//se una delle due transizioni è uguale a quella richiesta.
+		//se una delle due transizioni ï¿½ uguale a quella richiesta.
 		if (prima==null && seconda==null)
 			return false;
 		else if (prima==null)
@@ -114,11 +114,11 @@ public class PassoSimulazione
 		uscita="Passo di simulazione contenente:\n";
 		if (prima!=null)
 		{
-			uscita=uscita+"   * "+prima.toString()+"\n";
+			uscita+= "   * transizione "+prima.toString()+" della macchina "+prima.getNomeMacchina()+"\n";
 		}
 		if (seconda!=null)
 		{
-			uscita=uscita+"   * "+seconda.toString()+"\n";
+			uscita+= "   * transizione "+seconda.toString()+" della macchina "+seconda.getNomeMacchina()+"\n";
 		}
 		
 		return uscita;

@@ -60,165 +60,6 @@ public class Parser
 	 * 
 	 * @param inputXMLFile
 	 * @return
-	 * @throws JAXBException
-	 * @throws SAXException
-	 */
-	public Engine parseToEngine (File inputXMLFile) throws JAXBException, SAXException
-	{
-		//parsiamo il file
-		Dati dati = parse (inputXMLFile);
-		int max;
-		
-		//creiamo le due macchine
-		MacchinaStatiFiniti macchinaUno = new MacchinaStatiFiniti(dati.getMacchina().get(0).getNome());
-		MacchinaStatiFiniti macchinaDue = new MacchinaStatiFiniti(dati.getMacchina().get(1).getNome());
-		
-		//creaimo una lista temporanea di tutti gli stati della prima macchina. 
-		List<Stato> tempListaStatiUno = new ArrayList<Stato>();
-		max=dati.getMacchina().get(0).getListastati().getStato().size();
-		tempListaStatiUno.add(new Stato(macchinaUno, dati.getMacchina().get(0).getListastati().getStatoiniziale().getNome()));
-		for (int i =0; i<max; i++)
-		{
-			tempListaStatiUno.add(new Stato(macchinaUno,dati.getMacchina().get(0).getListastati().getStato().get(i).getNome()));
-		}
-		
-		//creaimo una lista temporanea di tutti gli stati della seconda macchina. 
-		List<Stato> tempListaStatiDue = new ArrayList<Stato>();
-		max=dati.getMacchina().get(1).getListastati().getStato().size();
-		tempListaStatiDue.add(new Stato(macchinaDue, dati.getMacchina().get(1).getListastati().getStatoiniziale().getNome()));
-		for (int i =0; i<max; i++)
-		{
-			tempListaStatiDue.add(new Stato(macchinaDue,dati.getMacchina().get(1).getListastati().getStato().get(i).getNome()));
-		}
-		
-		//creiamo una lista temporanea di tutte le transizioni della prima macchina
-		List<Transazione> tempListaTransizioniUno = new ArrayList<Transazione>();
-		max=dati.getMacchina().get(0).getListatransizioni().getTransizioni().size();
-		for (int i=0; i<max;i++)
-		{
-			//stato temporaneo: quello finale della transazione
-			Stato tempStato = cercaStato(tempListaStatiUno,dati.getMacchina().get(0).getListatransizioni().getTransizioni().get(i).getStatofinale().getNome());
-			//costruttore temporaneo: quello della transazione (la macchina, il suo nome, lo stato temporaneo)
-			Transazione tempTransazione = new Transazione(macchinaUno,dati.getMacchina().get(0).getListatransizioni().getTransizioni().get(i).getNome(),tempStato);
-			//aggiungiamo alla lista temporanea
-			tempListaTransizioniUno.add(tempTransazione);
-			//aggiungiamo la transazione al suo stato iniziale
-			tempStato = cercaStato(tempListaStatiUno,dati.getMacchina().get(0).getListatransizioni().getTransizioni().get(i).getStatoiniziale().getNome());
-			//	System.out.print("transizione= "+tempTransazione.toString());
-			//	System.out.print("stato= "+tempStato.toString());
-			
-			tempStato.addTransazione(tempTransazione);
-		}
-		
-		//creiamo una lista temporanea di tutte le transizioni della seconda macchina
-		List<Transazione> tempListaTransizioniDue = new ArrayList<Transazione>();
-		max=dati.getMacchina().get(1).getListatransizioni().getTransizioni().size();
-		for (int i=0; i<max;i++)
-		{
-			Stato tempStato = cercaStato(tempListaStatiDue,dati.getMacchina().get(1).getListatransizioni().getTransizioni().get(i).getStatofinale().getNome());
-			Transazione tempTransazione = new Transazione(macchinaDue,dati.getMacchina().get(1).getListatransizioni().getTransizioni().get(i).getNome(),tempStato);
-			tempListaTransizioniDue.add(tempTransazione);
-			cercaStato(tempListaStatiDue,dati.getMacchina().get(1).getListatransizioni().getTransizioni().get(i).getStatoiniziale().getNome()).addTransazione(tempTransazione);
-		}
-		
-		//settiamo lo stato iniziale
-		//System.out.println("Imposto gli stati:");
-		Stato inizialeUno = cercaStato(tempListaStatiUno, dati.getMacchina().get(0).getListastati().getStatoiniziale().getNome());
-		Stato inizialeDue = cercaStato(tempListaStatiDue, dati.getMacchina().get(1).getListastati().getStatoiniziale().getNome());
-		macchinaUno.setStatoCorrente(inizialeUno);
-		macchinaDue.setStatoCorrente(inizialeDue);
-		
-		
-		//-----DEBUG-----
-		// -------- Copiato in view printFileContent
-		System.out.println("Dati contenuti nel file: \n");
-		System.out.println("Macchina: "+macchinaUno.getNome());
-		System.out.println("Lista stati:");
-		for (int i=0;i<tempListaStatiUno.size();i++)
-		{
-			System.out.print(i+"= "+tempListaStatiUno.get(i).toString()+"; transazioni uscenti: ");
-			for (int y=0;y<tempListaStatiUno.get(i).getTransazioniUscenti().size();y++)
-				System.out.print(tempListaStatiUno.get(i).getTransazioniUscenti().get(y).getNome()+"; ");
-			System.out.print("\n");
-		}
-		
-		System.out.println("Lista transazioni:");
-		for (int i=0;i<tempListaTransizioniUno.size();i++)
-		{
-			System.out.println(i+"= "+tempListaTransizioniUno.get(i).getNome()+"; stato di arrivo: "+tempListaTransizioniUno.get(i).getStatoArrivo().getNome());
-		}
-		System.out.print("\n");
-		System.out.println("Macchina: "+macchinaDue.getNome());
-		System.out.println("Lista stati:");
-		for (int i=0;i<tempListaStatiDue.size();i++)
-		{
-			System.out.print(i+"= "+tempListaStatiDue.get(i).getNome()+"; transazioni uscenti: ");
-			for (int y=0;y<tempListaStatiDue.get(i).getTransazioniUscenti().size();y++)
-				System.out.print(tempListaStatiDue.get(i).getTransazioniUscenti().get(y).getNome()+"; ");
-			System.out.print("\n");
-		}
-		System.out.println("Lista transazioni:");
-		for (int i=0;i<tempListaTransizioniDue.size();i++)
-			System.out.println(i+"= "+tempListaTransizioniDue.get(i).getNome()+"; stato di arrivo: "+tempListaTransizioniDue.get(i).getStatoArrivo().getNome());
-		// -------- Copiato in view END printFileContent
-		//-----DEBUG END-----
-		
-		//il motore � quasi pronto. le macchine sono impostate
-		Engine motore = new Engine (macchinaUno,macchinaDue);
-		
-		//preparo la lista delle relazioni
-		System.out.println("\nLista Relazioni:");
-		ListaRelazioni tempListaRelazioni = new ListaRelazioni();
-		max=dati.getListarelazioni().getRelazione().size();
-		for (int i=0;i<max;i++)
-		{
-			Relazionetype tempRelazione = dati.getListarelazioni().getRelazione().get(i);
-			Transazione tempUno=null;
-			Transazione tempDue=null;
-			//se la prima transizione appartiene alla prima macchina e la seconda alla seconda
-			if (tempRelazione.getTransizione().get(0).getMacchina().equals(macchinaUno.getNome())
-					&& tempRelazione.getTransizione().get(1).getMacchina().equals(macchinaDue.getNome()) )
-			{
-				//cerco la prima transazione nella prima lista (e la seconda nella seconda)
-				tempUno=cercaTransizione(tempListaTransizioniUno, tempRelazione.getTransizione().get(0).getNome());
-				tempDue=cercaTransizione(tempListaTransizioniDue, tempRelazione.getTransizione().get(1).getNome());
-			}
-			//altrimenti il contrario
-			else if (tempRelazione.getTransizione().get(1).getMacchina().equals(macchinaUno.getNome())
-					&& tempRelazione.getTransizione().get(0).getMacchina().equals(macchinaDue.getNome()))
-			{
-				tempUno=cercaTransizione(tempListaTransizioniDue, tempRelazione.getTransizione().get(0).getNome());
-				tempDue=cercaTransizione(tempListaTransizioniUno, tempRelazione.getTransizione().get(1).getNome());
-			}
-			//in base al tipo aggiungo la relazione
-			if (tempRelazione.getTipo().equals(Tipotransizione.ASINCRONA))
-			{
-				System.out.println("Imposto relazione ASINCRONA tra "+tempUno.toString()+" e "+tempDue.toString()+".");
-				tempListaRelazioni.addRelazione(new Asincrone());
-			}
-			else if (tempRelazione.getTipo().equals(Tipotransizione.SINCRONA))
-			{
-				System.out.println("Imposto relazione SINCRONA tra "+tempUno.toString()+" e "+tempDue.toString()+".");
-				tempListaRelazioni.addRelazione(new Sincrone(tempUno,tempDue));
-			}
-			else if (tempRelazione.getTipo().equals(Tipotransizione.MUTEX))
-			{
-				System.out.println("Imposto relazione MUTEX tra "+tempUno.toString()+" e "+tempDue.toString()+".");
-				tempListaRelazioni.addRelazione(new MutuamenteEsclusive(tempUno,tempDue));
-			}
-		}
-		
-		//
-		motore.setRelazioni(tempListaRelazioni);
-		
-		return motore;
-		
-	}
-
-	/**
-	 * 
-	 * @param inputXMLFile
-	 * @return
 	 * @throws JAXBException 
 	 * @throws SAXException 
 	 */
@@ -308,7 +149,7 @@ public class Parser
 	}
 	
 	/**
-	 * Questo metodo verifica alcuni parametri delle liste affinch� siano valide.
+	 * Questo metodo verifica alcuni parametri delle liste affinche` siano valide.
 	 * @param listaStati
 	 * @param listaTransizioni
 	 * @return
@@ -322,13 +163,13 @@ public class Parser
 		List<Transizionitype> tempListaTransizioni = listaTransizioni.getTransizioni();
 		int max = tempListaStati.size();
 		
-		//verifichiamo l'unicit� del nome di ogni stato...
+		//verifichiamo l'unicita` del nome di ogni stato...
 		//...per prima cosa che lo stato iniziale non sia vuoto
 		if (statoIniziale.getNome().equals(""))
 			throw new JAXBException("Errore! Non ci possono essere stati con il nome vuoto!");
 		for (int i=0; i<max; i++)
 		{
-			//...verifichiamo l'unicit� sia che sia quello iniziale
+			//...verifichiamo l'unicita` sia che sia quello iniziale
 			if (tempListaStati.get(i).getNome().equals(statoIniziale.getNome()))
 				throw new JAXBException("Errore! Non ci possono essere due stati con lo stesso nome!");
 			//...sia che non sia vuoto
@@ -343,7 +184,7 @@ public class Parser
 			}
 		}
 		max= tempListaTransizioni.size();
-		//verifichiamo l'unicit� del nome di ogni transizione e...
+		//verifichiamo l'unicita` del nome di ogni transizione e...
 		for (int i=0; i<max; i++)
 		{
 			//...e che non sia vuoto e che...

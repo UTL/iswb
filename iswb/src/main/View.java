@@ -41,7 +41,7 @@ public class View {
 	}
 	
 	public void askInputFile(){
-		System.out.println("Digita il nome del file di input: ");
+		System.out.println("Digita il nome del file di input, oppure 0 per terminare: ");
 		System.out.println("Esempio: testcase/primo.xml");
 		System.out.println("Esempio: testcase/secondo.xml");
 		System.out.println("Esempio: testcase/terzo.xml");
@@ -126,11 +126,19 @@ public class View {
 		//if (i == 1) 
 		System.out.println("Lista stati:");
 		
+		
 		for (int i=0;i<modello.getNumeroStati(numeroMacchina);i++)
 		{
+			int nTransizioni= modello.getNumeroTransizioniUscenti(i, numeroMacchina);
+			System.out.println(i+"= "+ modello.getNomeStato(i, numeroMacchina)+";");
+			
+			if(nTransizioni<=0){
+				System.out.println("nessuna transizione uscente.\n");
+				continue;
+			}
 			//tempListaStati.get(i).toString() metodo
-			System.out.println(i+"= "+ modello.getNomeStato(i, numeroMacchina)+"; \ntransazioni uscenti: ");	//tempListaStati.get(i).toString()+"; transazioni uscenti: ");
-			for (int y=0;y< modello.getNumeroTransizioniUscenti(i, numeroMacchina);y++){//tempListaStati.get(i).getTransazioniUscenti().size();y++)
+			System.out.println("transazioni uscenti: ");	//tempListaStati.get(i).toString()+"; transazioni uscenti: ");
+			for (int y=0;y< nTransizioni;y++){//tempListaStati.get(i).getTransazioniUscenti().size();y++)
 				System.out.print("\t"+modello.getNomeTransizioneUscente(i, y, numeroMacchina) +", ");//tempListaStati.get(i).getTransazioniUscenti().get(y).getNome()+"; ");
 				System.out.println("il cui stato di arrivo e':"+modello.getNomeStatoArrivo(i, y, numeroMacchina));
 			}
@@ -162,6 +170,11 @@ public class View {
 			else System.out.println("MUTEX");
 		}
 		
+	}
+	
+	public void printEseguo(){
+		System.out.println("=====");
+		System.out.println("Eseguo:");
 	}
 
 	

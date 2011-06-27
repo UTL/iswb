@@ -591,6 +591,14 @@ public class Model {
 			return tempRelazione.getTipo();
 		}
 	
+		public void eseguiPasso(int letto){
+			List<PassoSimulazione> passi;
+			passi = motore.getPassiAttivi();
+			motore.esegui(passi.get(letto-1));
+			//motore.esegui(passi.get(letto-1));
+
+		}
+		
 	/*public String getNomeTransizioneUscente(){
 		tempListaTransizioniUno.get(i).getStatoArrivo().getNome());	
 	}*/
