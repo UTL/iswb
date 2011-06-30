@@ -43,6 +43,7 @@ public class Model {
 	/*public MacchinaStatiFiniti getMacchina(int i){
 		String nomeMacchina = "";
 		
+		
 		if (i == 1)
 			nomeMacchina = getNomeMacchinaUno();
 		else if (i == 2)
