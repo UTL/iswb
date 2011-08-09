@@ -72,20 +72,20 @@ public class Model {
 		xml = fileXml;
 	}
 
-	public void engine(){
-		try {
+	public void engine() throws JAXBException, SAXException{
+		//try {
 			dati = parse (xml);
 			
 			macchinaUno = new MacchinaStatiFiniti(dati.getMacchina().get(0).getNome());
 			macchinaDue = new MacchinaStatiFiniti(dati.getMacchina().get(1).getNome());
 			motore = parseToEngine();
-		} catch (JAXBException e) {
+		/*} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	public Engine parseToEngine () throws JAXBException, SAXException
@@ -297,7 +297,7 @@ public class Model {
 		int max;
 		max= tempListaTransizioni.size();
 		//verifichiamo l'unicit� del nome di ogni transizione e...
-		boolean statoInizIsolato = false;
+		boolean statoInizIsolato = true;
 		for (int i=0; i<max; i++)
 		{
 			//...e che non sia vuoto e che...
@@ -317,8 +317,10 @@ public class Model {
 			if (!contieneStato(tempListaStati,tempListaTransizioni.get(i).getStatofinale()) &&
 					! statoIniziale.getNome().equals(tempListaTransizioni.get(i).getStatofinale().getNome()))
 				throw new JAXBException("Errore! Una transizione fa riferimento ad uno stato non esistente!");
-			if (!tempListaTransizioni.get(i).getStatoiniziale().equals(statoIniziale))
-				statoInizIsolato = true;
+			if (!tempListaTransizioni.get(i).getStatoiniziale().equals(statoIniziale)){
+				System.out.println("stato isolato, i="+i);
+				statoInizIsolato = false;
+				}
 		}
 		if (statoInizIsolato)
 			throw new JAXBException("Errore! Lo stato iniziale e` isolato!");

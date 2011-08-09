@@ -58,20 +58,20 @@ public class Controller {
 			else 
 				break;
 		}
-			
+		try {	
 		modello.engine();
-		System.out.println("START DEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUG");
+		System.out.println("START DEBUG");
 		
 		
 		vista.printFileContent(modello);
 		
+		System.out.println("deboggare");
 		
-		try {
 			vista.printRelazioni(modello);
 		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
 			vista.printRelError();
+			System.exit(-1);
+		} catch (SAXException e){
 			System.exit(-1);
 		}
 		System.out.println("END DEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUG");
