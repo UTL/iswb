@@ -60,12 +60,10 @@ public class Controller {
 		}
 		try {	
 		modello.engine();
-		System.out.println("START DEBUG");
 		
 		
 		vista.printFileContent(modello);
 		
-		System.out.println("deboggare");
 		
 			vista.printRelazioni(modello);
 		} catch (JAXBException e) {
@@ -74,10 +72,7 @@ public class Controller {
 		} catch (SAXException e){
 			System.exit(-1);
 		}
-		System.out.println("END DEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUGDEBUG");
 
-		//TODO: togliere i print da parsetoengine
-		//TODO: aggiungere attributi a model per robaccia in parsetoengine
 		
 		int letto = 0;
 		

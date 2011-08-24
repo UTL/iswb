@@ -60,7 +60,6 @@ public class Model {
 	}
 
 	public void engine() throws JAXBException, SAXException{
-		//try {
 			dati = parse (xml);
 			
 			macchinaUno = new MacchinaStatiFiniti(dati.getMacchina().get(0).getNome());
@@ -455,11 +454,4 @@ public class Model {
 
 		}
 		
-
-	
-	/*DA FINIRE
-	public int getListaStatiSize(int numeroMacchina){
-		int dimensione = 0;
-		return tempListaStatiDue.get(i).getTransazioniUscenti().size();
-	}*/
 }
