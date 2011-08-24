@@ -10,7 +10,7 @@ import it.unibs.fp.mylib.InputDati;
 
 public class Controller {
 	
-	static String path = "docs/xsd/schema.xsd";
+	public static final String path = "docs/xsd/schema.xsd";
 	
 	public static void main(String[] args){
 		View vista = new View();

@@ -61,8 +61,8 @@ public class Engine
 	public List<PassoSimulazione> getPassiAttivi()
 	{
 		//le transazioni attive delle due macchine.
-		List<Transizione> uno = macchinaUno.getStatoCorrente().getTransazioniUscenti();
-		List<Transizione> due = macchinaDue.getStatoCorrente().getTransazioniUscenti();
+		List<Transizione> due = getStatoCorrenteMacchinaUno();
+		List<Transizione> uno = getStatoCorrenteMacchinaDue();
 		List<PassoSimulazione> lista = new ArrayList<PassoSimulazione>();
 		
 		//computa tutte le coppie di transizioni eseguibili come passi di simulazione
@@ -88,6 +88,14 @@ public class Engine
 		else
 			return matriceRelazioni.computaAmmissibili(lista);
 		
+	}
+
+	public List<Transizione> getStatoCorrenteMacchinaDue() {
+		return macchinaDue.getStatoCorrente().getTransazioniUscenti();
+	}
+
+	public List<Transizione> getStatoCorrenteMacchinaUno() {
+		return macchinaUno.getStatoCorrente().getTransazioniUscenti();
 	}
 	
 	/**
