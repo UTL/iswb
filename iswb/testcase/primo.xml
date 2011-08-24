@@ -9,7 +9,7 @@
         </listastati>
         
         <listatransizioni>
-            <!--<transizioni nome="t1">
+            <transizioni nome="t1">
                 <statoiniziale nome="S1"/>
                 <statofinale nome="S2"/>
             </transizioni>
@@ -24,7 +24,7 @@
             <transizioni nome="t4">
                 <statoiniziale nome="S2"/>
                 <statofinale nome="S1"/>
-            </transizioni>-->
+            </transizioni>
             
         </listatransizioni>
     

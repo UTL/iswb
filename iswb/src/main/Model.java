@@ -280,7 +280,6 @@ public class Model {
 					! statoIniziale.getNome().equals(tempListaTransizioni.get(i).getStatofinale().getNome()))
 				throw new JAXBException("Errore! Una transizione fa riferimento ad uno stato non esistente!");
 			if (!tempListaTransizioni.get(i).getStatoiniziale().equals(statoIniziale)){
-				System.out.println("stato isolato, i="+i);
 				statoInizIsolato = false;
 				}
 		}

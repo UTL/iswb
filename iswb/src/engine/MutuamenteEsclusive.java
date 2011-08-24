@@ -42,10 +42,13 @@ public class MutuamenteEsclusive implements Relazione
 		if (passo.contiene(prima) && passo.contiene(seconda) && ! passo.singolo())
 		{
 			uscita= false;
+			System.out.println("rilevato false in mutex");
 		}
 		else
 		{
 			uscita= true;
+			System.out.println("rilevato true in mutex");
+
 		}
 		/*
 		System.out.println("--");
